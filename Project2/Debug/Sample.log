@@ -1,0 +1,16 @@
+﻿  Sample.cpp
+c:\code\cs450\project2\sample.cpp(429): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(789): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450\project2\sample.cpp(804): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(815): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(817): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(819): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(821): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(829): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(831): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(833): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(835): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450\project2\sample.cpp(1181): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450\project2\sample.cpp(1240): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Sample.vcxproj -> C:\Code\CS450\Project2\Debug\Sample.exe
+  Sample.vcxproj -> C:\Code\CS450\Project2\Debug\Sample.pdb (Full PDB)
