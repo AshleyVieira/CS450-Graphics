@@ -1,0 +1,6 @@
+﻿  Sample.cpp
+c:\code\cs450\project4\sample.cpp(400): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450\project4\sample.cpp(717): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+c:\code\cs450\project4\sample.cpp(735): warning C4244: 'argument' : conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450\project4\sample.cpp(1241): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
+  Sample.vcxproj -> C:\Code\CS450\Project4\Debug\Sample.exe
