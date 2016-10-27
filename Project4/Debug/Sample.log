@@ -1,6 +1,24 @@
 ﻿  Sample.cpp
-c:\code\cs450\project4\sample.cpp(400): warning C4244: 'argument' : conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450\project4\sample.cpp(717): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-c:\code\cs450\project4\sample.cpp(735): warning C4244: 'argument' : conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450\project4\sample.cpp(1241): warning C4305: 'argument' : truncation from 'double' to 'GLfloat'
-  Sample.vcxproj -> C:\Code\CS450\Project4\Debug\Sample.exe
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(671427): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(671427): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(1342827): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(1342827): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(2014227): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledobj.h(2014227): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(292): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(292): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(322): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(322): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(352): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project4\ncc-1701\untitledmtl.h(352): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\sample.cpp(725): warning C4018: '<': signed/unsigned mismatch
+c:\code\cs450-graphics\project4\sample.cpp(759): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project4\sample.cpp(777): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(721): warning C4101: 'p02': unreferenced local variable
+c:\code\cs450-graphics\project4\sample.cpp(721): warning C4101: 'n': unreferenced local variable
+c:\code\cs450-graphics\project4\sample.cpp(721): warning C4101: 'p01': unreferenced local variable
+c:\code\cs450-graphics\project4\sample.cpp(1146): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(1205): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(1283): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Sample.vcxproj -> C:\Code\CS450-Graphics\Project4\Debug\Sample.exe
+  Sample.vcxproj -> C:\Code\CS450-Graphics\Project4\Debug\Sample.pdb (Full PDB)
