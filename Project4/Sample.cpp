@@ -172,9 +172,6 @@ int Light2On = 1;
 int Light3On = 1;
 float White[] = { 1.,1.,1.,1. };
 
-#include "NCC-1701\untitledOBJ.h"
-#include "NCC-1701\untitledMTL.h"
-
 
 // function prototypes:
 
@@ -387,13 +384,13 @@ Display( )
 	glEnable( GL_NORMALIZE );
 
 	// Do lighting
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 
 
 	// draw the current object:
-	glCallList(Enterprise);
+	//glCallList(Enterprise);
 
-	/*glShadeModel(GL_FLAT);
+	glShadeModel(GL_FLAT);
 	SetPointLight(GL_LIGHT0, 0., 0., 0., 1., 1., 1.);
 		glCallList(Teapot);
 		glCallList(Cube);
@@ -402,7 +399,7 @@ Display( )
 		glPushMatrix();
 			glTranslatef(0., 0., 11. * Time);
 			glCallList(Torpedo);
-		glPopMatrix();*/
+		glPopMatrix();
 
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -715,40 +712,7 @@ InitLists( )
 
 	Enterprise = glGenLists(1);
 	glNewList(Enterprise, GL_COMPILE);
-		int i;
-		struct point *p0, *p1, *p2;
-		struct tri *tp;
-		float p01[3], p02[3], n[3];
-
-
-		glBegin(GL_TRIANGLES);
-		for (i = 0, tp = EnterpriseNormals; i < EnterpriseNumNormals; i++, tp++)
-		{
-			p0 = &EnterpriseVerts[tp->p0];
-			p1 = &EnterpriseVerts[tp->p1];
-			p2 = &EnterpriseVerts[tp->p2];
-
-			/* fake "lighting" from above:			*/
-
-			/*p01[0] = p1->x - p0->x;
-			p01[1] = p1->y - p0->y;
-			p01[2] = p1->z - p0->z;
-			p02[0] = p2->x - p0->x;
-			p02[1] = p2->y - p0->y;
-			p02[2] = p2->z - p0->z;
-			Cross(p01, p02, n);
-			Unit(n, n);
-			n[1] = fabs(n[1]);
-			n[1] += .25;
-			if (n[1] > 1.)
-				n[1] = 1.;
-			glColor3f(0., n[1], 0.);*/
-
-			glVertex3f(p0->x, p0->y, p0->z);
-			glVertex3f(p1->x, p1->y, p1->z);
-			glVertex3f(p2->x, p2->y, p2->z);
-		}
-		glEnd();
+	
 	glEndList();
 
 
