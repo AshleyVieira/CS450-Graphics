@@ -157,7 +157,11 @@ int		DepthCueOn;				// != 0 means to use intensity depth cueing
 GLuint	Cube;				// object display list
 GLuint	Enterprise;
 GLuint  Teapot;
-GLuint	Torpedo;
+GLuint	BlueTorpedo;
+GLuint	RedTorpedo;
+GLuint	LightOrb0;
+GLuint	LightOrb1;
+GLuint	LightOrb2;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -166,10 +170,10 @@ int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze;
 double  Time;
-int Light0On = 1;
-int Light1On = 1;
-int Light2On = 1;
-int Light3On = 1;
+int Light0On =1;
+int Light1On =1;
+int Light2On =1;
+bool Light3On;
 float White[] = { 1.,1.,1.,1. };
 
 
@@ -208,7 +212,7 @@ void SetSpotLight(int, float, float, float, float, float, float, float, float, f
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
-#define MS_PER_CYCLE 2000
+#define MS_PER_CYCLE 4000
 
 
 // main program:
@@ -337,7 +341,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 0., 3.,     0., 0., 0.,     0., 1., 0. );
+	gluLookAt( 0., 3., 3.,     0., 2., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -387,18 +391,62 @@ Display( )
 	glEnable(GL_LIGHTING);
 
 
-	// draw the current object:
-	//glCallList(Enterprise);
-
 	glShadeModel(GL_FLAT);
-	SetPointLight(GL_LIGHT0, 0., 0., 0., 1., 1., 1.);
+
 		glCallList(Teapot);
 		glCallList(Cube);
-		glDisable(GL_LIGHTING);
-
+	
+		//Blue Ball
 		glPushMatrix();
-			glTranslatef(0., 0., 11. * Time);
-			glCallList(Torpedo);
+			glTranslatef(4. * Time, 0., -13. * Time);
+			glCallList(BlueTorpedo);
+		glPopMatrix();
+
+		//Blue light
+		SetPointLight(GL_LIGHT0, 4. * Time, 0., -13.5 * Time, 0., 0., 2.);
+		glPushMatrix();
+		if (Light0On) {
+			glEnable(GL_LIGHT0);
+		}
+		else {
+			glDisable(GL_LIGHT0);
+		}
+			glTranslatef(4. * Time, 0., -13. * Time);
+			glCallList(LightOrb0);
+		glPopMatrix();
+
+		//Red Ball
+		glPushMatrix();
+			glTranslatef(-4. * Time, 0., -13. * Time);
+			glCallList(RedTorpedo);
+		glPopMatrix();
+
+		//Red light
+		SetPointLight(GL_LIGHT1, -4. * Time, 0., -13.5 * Time, 2., 0., 0.);
+		glPushMatrix();
+		if (Light1On) {
+			glEnable(GL_LIGHT1);
+		}
+		else {
+			glDisable(GL_LIGHT1);
+		}
+			glTranslatef(-4. * Time, 0., -13. * Time);
+			glCallList(LightOrb1);
+		glPopMatrix();
+
+		glShadeModel(GL_SMOOTH);
+
+		//White spot light on teapot
+		SetSpotLight(GL_LIGHT2, 0., 3.1, -9.8, 0., 0., 1., 5., 5., 5.);
+		//SetPointLight(GL_LIGHT2, 0., 3.1, -9.8, 3., 3., 3.);
+		glPushMatrix();
+		if (Light2On) {
+			glEnable(GL_LIGHT2);
+		}
+		else {
+			glDisable(GL_LIGHT2);
+		}
+			glCallList(LightOrb2);
 		glPopMatrix();
 
 
@@ -721,6 +769,7 @@ InitLists( )
 		//TEAPOT
 		glPushMatrix();
 		glTranslatef(0., 1.8, -15);
+		glRotatef(270, 0., 1., 0.);
 		glutSolidTeapot(3.);
 		glPopMatrix();
 	glEndList();
@@ -729,16 +778,56 @@ InitLists( )
 	glNewList(Cube, GL_COMPILE);
 		glPushMatrix();
 		glColor3f(0., 1., 0.);
-		glutSolidCube(2.);
+		glutSolidDodecahedron();
 		glPopMatrix();
 	glEndList();
 
-	Torpedo = glGenLists(1);
-	glNewList(Torpedo, GL_COMPILE);
+	BlueTorpedo = glGenLists(1);
+	glNewList(BlueTorpedo, GL_COMPILE);
 		glPushMatrix();
-		glTranslatef(0., 0., -12.);
+		glTranslatef(2., 0., -1.);
 		glColor3f(0., 0., 1.);
 		glutSolidSphere(.5, 30., 30.);
+		glPopMatrix();
+	glEndList();
+
+	RedTorpedo = glGenLists(1);
+	glNewList(RedTorpedo, GL_COMPILE);
+		glPushMatrix();
+		glTranslatef(-2., 0., -1.);
+		glColor3f(1., 0., 0.);
+		glutSolidSphere(.5, 30., 30.);
+		glPopMatrix();
+	glEndList();
+
+
+	//Blue light on blue sphere
+	LightOrb0 = glGenLists(1);
+	glNewList(LightOrb0, GL_COMPILE);
+		glPushMatrix();
+		glTranslatef(2., 0., -1.5);
+		glColor3f(0., 0., 1.);
+		glutSolidSphere(.1, 30., 30.);
+		glPopMatrix();
+	glEndList();
+
+	//Red light on red sphere
+	LightOrb1 = glGenLists(1);
+	glNewList(LightOrb1, GL_COMPILE);
+		glPushMatrix();
+		glTranslatef(-2., 0., -1.5);
+		glColor3f(1., 0., 0.);
+		glutSolidSphere(.1, 30., 30.);
+		glPopMatrix();
+	glEndList();
+
+	//White spotlight on teapot spout
+	LightOrb2 = glGenLists(1);
+	glNewList(LightOrb2, GL_COMPILE);
+		glPushMatrix();
+		glTranslatef(0., 3.1, -9.8); //spout position
+		glColor3f(0., 1., 1.);
+		glutSolidSphere(.1, 30., 30.);
 		glPopMatrix();
 	glEndList();
 
