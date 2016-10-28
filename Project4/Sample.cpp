@@ -162,6 +162,8 @@ GLuint	RedTorpedo;
 GLuint	LightOrb0;
 GLuint	LightOrb1;
 GLuint	LightOrb2;
+GLuint	CylinderList;		
+GLuint	TexList;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -175,7 +177,11 @@ int Light1On =1;
 int Light2On =1;
 bool Light3On;
 float White[] = { 1.,1.,1.,1. };
+unsigned char *texture;
+int texWidth, texHeight;
+GLuint tex0, tex1;
 
+#include "bmptotexture.cpp"
 
 // function prototypes:
 
@@ -392,15 +398,24 @@ Display( )
 
 
 	//glShadeModel(GL_FLAT);
+		glPushMatrix();
+		SetMaterial(.7, .7, .7, 0.);
+			glCallList(Teapot);
+		glPopMatrix();
 
-		glCallList(Teapot);
-
-		glShadeModel(GL_SMOOTH);
-		glCallList(Cube);
+		glPushMatrix();
+			glShadeModel(GL_SMOOTH);
+			SetMaterial(0., 1., 0., 200.);
+			glCallList(Cube);
+		glPopMatrix();
 	
-		glShadeModel(GL_FLAT);
+		//SetMaterial(0., 0., 0., 0.);
+		
 		//Blue Ball
 		glPushMatrix();
+		glShadeModel(GL_FLAT);
+			SetMaterial(0.33, 0.33, 1., .5);
+
 			glTranslatef(4. * Time, 0., -13. * Time);
 			glCallList(BlueTorpedo);
 		glPopMatrix();
@@ -420,6 +435,7 @@ Display( )
 
 		//Red Ball
 		glPushMatrix();
+			SetMaterial(1., .33, .33, .5);
 			glTranslatef(-4. * Time, 0., -13. * Time);
 			glCallList(RedTorpedo);
 		glPopMatrix();
@@ -452,6 +468,34 @@ Display( )
 			glCallList(LightOrb2);
 		glPopMatrix();
 
+		//texture = BmpToTexture("looney_tunes_bugs.bmp", &texWidth, &texHeight);
+
+		////Texture Cylinder
+		//glEnable(GL_TEXTURE_2D);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+
+		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+		//glGenTextures(1, &tex0); // assign binding “handles”
+		//glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+		
+		glPushMatrix();
+			glMatrixMode(GL_TEXTURE);
+			//put center of texture on center of disc
+			glTranslatef(0.5, .5, 0.);
+			glMatrixMode(GL_MODELVIEW);
+			glTranslatef(0., 3., -4.);
+			SetMaterial(1., 1., 1., 1.);
+			
+			glCallList(CylinderList);
+			glDisable(GL_TEXTURE_2D);
+			
+		glPopMatrix();
+		
 
 	// draw some gratuitous text that just rotates on top of the scene:
 
@@ -489,6 +533,9 @@ Display( )
 	// note: be sure to use glFlush( ) here, not glFinish( ) !
 
 	glFlush( );
+
+	//glDeleteLists(CylinderList, 10);
+
 }
 
 
@@ -673,6 +720,8 @@ InitMenus( )
 void
 InitGraphics( )
 {
+
+
 	// request the display modes:
 	// ask for red-green-blue-alpha color, double-buffering, and z-buffering:
 
@@ -747,6 +796,8 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 
+	
+
 }
 
 
@@ -777,6 +828,7 @@ InitLists( )
 		glPopMatrix();
 	glEndList();
 
+	//Actually a Torus
 	Cube = glGenLists(1);
 	glNewList(Cube, GL_COMPILE);
 		glPushMatrix();
@@ -790,7 +842,7 @@ InitLists( )
 	glNewList(BlueTorpedo, GL_COMPILE);
 		glPushMatrix();
 		glTranslatef(2., 0., -1.);
-		glColor3f(0., 0., 1.);
+		glColor3f(0.3, .3, 1.);
 		glutSolidSphere(.5, 30., 30.);
 		glPopMatrix();
 	glEndList();
@@ -799,7 +851,7 @@ InitLists( )
 	glNewList(RedTorpedo, GL_COMPILE);
 		glPushMatrix();
 		glTranslatef(-2., 0., -1.);
-		glColor3f(1., 0., 0.);
+		glColor3f(1., 0.3, 0.3);
 		glutSolidSphere(.5, 30., 30.);
 		glPopMatrix();
 	glEndList();
@@ -833,6 +885,62 @@ InitLists( )
 		glColor3f(0., 1., 1.);
 		glutSolidSphere(.1, 30., 30.);
 		glPopMatrix();
+	glEndList();
+
+	//Cylinder Vars
+	float lengthMulti = CYLINDERSIZE / 4.f; //radius
+	int slices = 60;
+	float height = CYLINDERSIZE / 12.f; //cylinder length
+
+	TexList = glGenLists(1);
+	glNewList(TexList, GL_COMPILE);
+
+	
+
+	glEndList();
+
+	CylinderList = glGenLists(1);
+	glNewList(CylinderList, GL_COMPILE);
+
+
+	//Saucer Cylinder
+	//Souce: http://cboard.cprogramming.com/game-programming/133658-opengl-draw-cylinder-yourself.html
+	glPushMatrix();
+	//glRotatef(90, 1., 0., 0.);
+	//Top circle
+	glBegin(GL_TRIANGLE_FAN);
+
+	glColor3f(0.51, 0.58, 0.61);
+	for (int i = 0; i <= (360); i += (360 / slices)) {
+		float a = i * M_PI / 180; // degrees to radians
+		glTexCoord2f((lengthMulti)* cos(a), (lengthMulti)* sin(a));
+		glVertex3f((lengthMulti)* cos(a), (lengthMulti)* sin(a), 0.0);
+	}
+	glEnd();
+
+	//Bottom circle
+	glBegin(GL_TRIANGLE_FAN);
+
+	glColor3f(0.51, 0.58, 0.61);
+	for (int i = 0; i <= (360); i += (360 / slices)) {
+		float a = i * M_PI / 180; // degrees to radians
+		glTexCoord2f((lengthMulti)* cos(a), (lengthMulti)* sin(a));
+		glVertex3f(lengthMulti * cos(a), lengthMulti * sin(a), height);
+	}
+	glEnd();
+
+	//Outside cover
+	glBegin(GL_QUAD_STRIP);
+
+	glColor3f(0.41, 0.48, 0.51);
+	for (int i = 0; i <= (360); i += (360 / slices)) {
+		float a = i * M_PI / 180; // degrees to radians
+		glVertex3f((lengthMulti)* cos(a), (lengthMulti)* sin(a), 0.0);
+		glVertex3f(lengthMulti * cos(a), lengthMulti * sin(a), height);
+	}
+	glEnd();
+	glPopMatrix();
+
 	glEndList();
 
 
