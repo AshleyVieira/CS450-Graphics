@@ -391,11 +391,14 @@ Display( )
 	glEnable(GL_LIGHTING);
 
 
-	glShadeModel(GL_FLAT);
+	//glShadeModel(GL_FLAT);
 
 		glCallList(Teapot);
+
+		glShadeModel(GL_SMOOTH);
 		glCallList(Cube);
 	
+		glShadeModel(GL_FLAT);
 		//Blue Ball
 		glPushMatrix();
 			glTranslatef(4. * Time, 0., -13. * Time);
@@ -778,7 +781,8 @@ InitLists( )
 	glNewList(Cube, GL_COMPILE);
 		glPushMatrix();
 		glColor3f(0., 1., 0.);
-		glutSolidDodecahedron();
+		//glutSolidDodecahedron();
+		glutSolidTorus(1., 2., 30., 30.);
 		glPopMatrix();
 	glEndList();
 

@@ -1,20 +1,21 @@
 ﻿  Sample.cpp
-c:\code\cs450-graphics\project4\sample.cpp(401): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(406): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(414): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(420): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(425): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(433): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(440): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\project4\sample.cpp(771): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\code\cs450-graphics\project4\sample.cpp(790): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(799): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(810): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(820): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(828): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-c:\code\cs450-graphics\project4\sample.cpp(830): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(1199): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(1258): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project4\sample.cpp(1336): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project4\sample.cpp(404): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(409): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(417): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(423): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(428): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(436): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(443): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project4\sample.cpp(774): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project4\sample.cpp(785): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(794): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(803): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(814): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(824): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(832): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project4\sample.cpp(834): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(1203): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(1262): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project4\sample.cpp(1340): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project4\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project4\Debug\Sample.pdb (Full PDB)
