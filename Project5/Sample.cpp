@@ -11,6 +11,9 @@
 #include <GL/glew.h>
 #endif
 
+#include "glslprogram.h"
+#include "glslprogram.cpp"
+
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -155,15 +158,7 @@ int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
 GLuint	Cube;				// object display list
-GLuint	Enterprise;
 GLuint  Teapot;
-GLuint	BlueTorpedo;
-GLuint	RedTorpedo;
-GLuint	LightOrb0;
-GLuint	LightOrb1;
-GLuint	LightOrb2;
-GLuint	CylinderList;		
-GLuint	TexList;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -171,15 +166,13 @@ int		WhichProjection;		// ORTHO or PERSP
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze;
-double  Time;
+double  Time = 0.;
 int Light0On =1;
 int Light1On =1;
 int Light2On =1;
-bool Light3On;
 float White[] = { 1.,1.,1.,1. };
-unsigned char *texture;
-int texWidth, texHeight;
-GLuint tex0, tex1;
+
+GLSLProgram *Pattern;
 
 #include "bmptotexture.cpp"
 
@@ -347,7 +340,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 3., 3.,     0., 2., 0.,     0., 1., 0. );
+	gluLookAt(0., 0., 8., 0., 0., 0., 0., 1., 0.);
 
 
 	// rotate the scene:
@@ -396,105 +389,52 @@ Display( )
 	// Do lighting
 	glEnable(GL_LIGHTING);
 
+	float S0, T0;
+	float Ds, Dt;
+	float V0, V1, V2;
+	float ColorR, ColorG, ColorB;
+	float SColorR, SColorG, SColorB;
+	float uKa, uKd, uKs;
+	float pointx, pointy, pointz;
+	float maxdist;
 
-	//glShadeModel(GL_FLAT);
-		glPushMatrix();
-		SetMaterial(.7, .7, .7, 0.);
-			glCallList(Teapot);
-		glPopMatrix();
+	S0 = 0.;
+	T0 = 0.;
+	ColorR = 0.9;
+	ColorG = 0.7;
+	ColorB = 0.7;
+	SColorR = 1.;
+	SColorG = 1.;
+	SColorB = 1.;
+	uKa = 0.5;
+	uKd = 0.5;
+	uKs = 0.3;
+	pointx = cos(Time * 18) * 2;
+	pointy = cos(Time * 13) * 3 - 2;
+	pointz = sin(Time * 18) * 2;
+	maxdist = 5.;
 
-		glPushMatrix();
-			glShadeModel(GL_SMOOTH);
-			SetMaterial(0., 1., 0., 200.);
-			glCallList(Cube);
-		glPopMatrix();
+	Pattern->Use();
+	Pattern->SetUniformVariable("uS0", S0);
+	Pattern->SetUniformVariable("uT0", T0);
+	Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB);
+	Pattern->SetUniformVariable("uSpecularColor", SColorR, SColorG, SColorB);
+	Pattern->SetUniformVariable("uKa", uKa);
+	Pattern->SetUniformVariable("uKd", uKd);
+	Pattern->SetUniformVariable("uKs", uKs);
+	Pattern->SetUniformVariable("point", pointx, pointy, pointz);
+	Pattern->SetUniformVariable("maxdist", maxdist);
+
+	//glShadeModel(GL_SMOOTH);
+
+	glPushMatrix();
+		SetMaterial(.7, .7, .7, 1.);
+		glCallList(Teapot);
+	glPopMatrix();
 	
-		//SetMaterial(0., 0., 0., 0.);
-		
-		//Blue Ball
-		glPushMatrix();
-		glShadeModel(GL_FLAT);
-			SetMaterial(0.33, 0.33, 1., .5);
+	Pattern->Use(0);
 
-			glTranslatef(4. * Time, 0., -13. * Time);
-			glCallList(BlueTorpedo);
-		glPopMatrix();
-
-		//Blue light
-		SetPointLight(GL_LIGHT0, 4. * Time, 0., -13.5 * Time, 0., 0., 2.);
-		glPushMatrix();
-		if (Light0On) {
-			glEnable(GL_LIGHT0);
-		}
-		else {
-			glDisable(GL_LIGHT0);
-		}
-			glTranslatef(4. * Time, 0., -13. * Time);
-			glCallList(LightOrb0);
-		glPopMatrix();
-
-		//Red Ball
-		glPushMatrix();
-			SetMaterial(1., .33, .33, .5);
-			glTranslatef(-4. * Time, 0., -13. * Time);
-			glCallList(RedTorpedo);
-		glPopMatrix();
-
-		//Red light
-		SetPointLight(GL_LIGHT1, -4. * Time, 0., -13.5 * Time, 2., 0., 0.);
-		glPushMatrix();
-		if (Light1On) {
-			glEnable(GL_LIGHT1);
-		}
-		else {
-			glDisable(GL_LIGHT1);
-		}
-			glTranslatef(-4. * Time, 0., -13. * Time);
-			glCallList(LightOrb1);
-		glPopMatrix();
-
-		glShadeModel(GL_SMOOTH);
-
-		//White spot light on teapot
-		SetSpotLight(GL_LIGHT2, 0., 3.1, -9.8, 0., 0., 1., 5., 5., 5.);
-		//SetPointLight(GL_LIGHT2, 0., 3.1, -9.8, 3., 3., 3.);
-		glPushMatrix();
-		if (Light2On) {
-			glEnable(GL_LIGHT2);
-		}
-		else {
-			glDisable(GL_LIGHT2);
-		}
-			glCallList(LightOrb2);
-		glPopMatrix();
-
-		//texture = BmpToTexture("looney_tunes_bugs.bmp", &texWidth, &texHeight);
-
-		////Texture Cylinder
-		//glEnable(GL_TEXTURE_2D);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-
-
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		//glGenTextures(1, &tex0); // assign binding “handles”
-		//glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
-		
-		glPushMatrix();
-			glMatrixMode(GL_TEXTURE);
-			//put center of texture on center of disc
-			glTranslatef(0.5, .5, 0.);
-			glMatrixMode(GL_MODELVIEW);
-			glTranslatef(0., 3., -4.);
-			SetMaterial(1., 1., 1., 1.);
-			
-			glCallList(CylinderList);
-			glDisable(GL_TEXTURE_2D);
-			
-		glPopMatrix();
+	SetPointLight(GL_LIGHT0, 5., 5., 5., 1., 1., 1.);
 		
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -521,7 +461,7 @@ Display( )
 	glMatrixMode( GL_MODELVIEW );
 	glLoadIdentity( );
 	glColor3f( 1., 1., 1. );
-	DoRasterString( 5., 5., 0., "Zach Schneider: Project 04" );
+	DoRasterString( 5., 5., 0., "Zach Schneider: Project 05" );
 
 
 	// swap the double-buffered framebuffers:
@@ -796,6 +736,13 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 
+	// Load our shaders
+	Pattern = new GLSLProgram();
+	bool valid = Pattern->Create("pattern.vert", "pattern.frag");
+	if (!valid) {
+		fprintf(stderr, "Failed to create shader pattern");
+	}
+
 	
 
 }
@@ -812,136 +759,19 @@ InitLists( )
 	
 	glutSetWindow( MainWindow );
 
-	Enterprise = glGenLists(1);
-	glNewList(Enterprise, GL_COMPILE);
 	
-	glEndList();
 
 
 	Teapot = glGenLists(1);
 	glNewList(Teapot, GL_COMPILE);
 		//TEAPOT
 		glPushMatrix();
-		glTranslatef(0., 1.8, -15);
+		//glTranslatef(0., 0., 0.);
 		glRotatef(270, 0., 1., 0.);
 		glutSolidTeapot(3.);
 		glPopMatrix();
 	glEndList();
 
-	//Actually a Torus
-	Cube = glGenLists(1);
-	glNewList(Cube, GL_COMPILE);
-		glPushMatrix();
-		glColor3f(0., 1., 0.);
-		//glutSolidDodecahedron();
-		glutSolidTorus(1., 2., 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-	BlueTorpedo = glGenLists(1);
-	glNewList(BlueTorpedo, GL_COMPILE);
-		glPushMatrix();
-		glTranslatef(2., 0., -1.);
-		glColor3f(0.3, .3, 1.);
-		glutSolidSphere(.5, 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-	RedTorpedo = glGenLists(1);
-	glNewList(RedTorpedo, GL_COMPILE);
-		glPushMatrix();
-		glTranslatef(-2., 0., -1.);
-		glColor3f(1., 0.3, 0.3);
-		glutSolidSphere(.5, 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-
-	//Blue light on blue sphere
-	LightOrb0 = glGenLists(1);
-	glNewList(LightOrb0, GL_COMPILE);
-		glPushMatrix();
-		glTranslatef(2., 0., -1.5);
-		glColor3f(0., 0., 1.);
-		glutSolidSphere(.1, 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-	//Red light on red sphere
-	LightOrb1 = glGenLists(1);
-	glNewList(LightOrb1, GL_COMPILE);
-		glPushMatrix();
-		glTranslatef(-2., 0., -1.5);
-		glColor3f(1., 0., 0.);
-		glutSolidSphere(.1, 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-	//White spotlight on teapot spout
-	LightOrb2 = glGenLists(1);
-	glNewList(LightOrb2, GL_COMPILE);
-		glPushMatrix();
-		glTranslatef(0., 3.1, -9.8); //spout position
-		glColor3f(0., 1., 1.);
-		glutSolidSphere(.1, 30., 30.);
-		glPopMatrix();
-	glEndList();
-
-	//Cylinder Vars
-	float lengthMulti = CYLINDERSIZE / 4.f; //radius
-	int slices = 60;
-	float height = CYLINDERSIZE / 12.f; //cylinder length
-
-	TexList = glGenLists(1);
-	glNewList(TexList, GL_COMPILE);
-
-	
-
-	glEndList();
-
-	CylinderList = glGenLists(1);
-	glNewList(CylinderList, GL_COMPILE);
-
-
-	//Saucer Cylinder
-	//Souce: http://cboard.cprogramming.com/game-programming/133658-opengl-draw-cylinder-yourself.html
-	glPushMatrix();
-	//glRotatef(90, 1., 0., 0.);
-	//Top circle
-	glBegin(GL_TRIANGLE_FAN);
-
-	glColor3f(0.51, 0.58, 0.61);
-	for (int i = 0; i <= (360); i += (360 / slices)) {
-		float a = i * M_PI / 180; // degrees to radians
-		glTexCoord2f((lengthMulti)* cos(a), (lengthMulti)* sin(a));
-		glVertex3f((lengthMulti)* cos(a), (lengthMulti)* sin(a), 0.0);
-	}
-	glEnd();
-
-	//Bottom circle
-	glBegin(GL_TRIANGLE_FAN);
-
-	glColor3f(0.51, 0.58, 0.61);
-	for (int i = 0; i <= (360); i += (360 / slices)) {
-		float a = i * M_PI / 180; // degrees to radians
-		glTexCoord2f((lengthMulti)* cos(a), (lengthMulti)* sin(a));
-		glVertex3f(lengthMulti * cos(a), lengthMulti * sin(a), height);
-	}
-	glEnd();
-
-	//Outside cover
-	glBegin(GL_QUAD_STRIP);
-
-	glColor3f(0.41, 0.48, 0.51);
-	for (int i = 0; i <= (360); i += (360 / slices)) {
-		float a = i * M_PI / 180; // degrees to radians
-		glVertex3f((lengthMulti)* cos(a), (lengthMulti)* sin(a), 0.0);
-		glVertex3f(lengthMulti * cos(a), lengthMulti * sin(a), height);
-	}
-	glEnd();
-	glPopMatrix();
-
-	glEndList();
 
 
 
@@ -994,8 +824,6 @@ Keyboard( unsigned char c, int x, int y )
 		case '2':
 			Light2On = !Light2On; break;
 
-		case '3':
-			Light3On = !Light3On; break;
 
 
 		case 'q':
