@@ -166,7 +166,7 @@ int		WhichProjection;		// ORTHO or PERSP
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze;
-double  Time = 0.;
+float  Time = 0.;
 int Light0On =1;
 int Light1On =1;
 int Light2On =1;
@@ -211,7 +211,7 @@ void SetSpotLight(int, float, float, float, float, float, float, float, float, f
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
-#define MS_PER_CYCLE 4000
+#define MS_PER_CYCLE 8000
 
 
 // main program:
@@ -388,6 +388,7 @@ Display( )
 
 	// Do lighting
 	glEnable(GL_LIGHTING);
+	glShadeModel(GL_SMOOTH);
 
 	float S0, T0;
 	float Ds, Dt;
@@ -395,23 +396,24 @@ Display( )
 	float ColorR, ColorG, ColorB;
 	float SColorR, SColorG, SColorB;
 	float uKa, uKd, uKs;
+
 	float pointx, pointy, pointz;
 	float maxdist;
 
 	S0 = 0.;
 	T0 = 0.;
-	ColorR = 0.9;
+	ColorR = 0.7;
 	ColorG = 0.7;
 	ColorB = 0.7;
-	SColorR = 1.;
-	SColorG = 1.;
-	SColorB = 1.;
-	uKa = 0.5;
-	uKd = 0.5;
-	uKs = 0.3;
-	pointx = cos(Time * 18) * 2;
-	pointy = cos(Time * 13) * 3 - 2;
-	pointz = sin(Time * 18) * 2;
+	SColorR = .7;
+	SColorG = .7;
+	SColorB = .7;
+	uKa = 0.7;
+	uKd = 0.7;
+	uKs = 0.7;
+	pointx = cos(Time * 20);
+	pointy = Time * 5.;//cos(Time * 20) * 2;
+	pointz = 1.;//cos(Time * 20) * 2;
 	maxdist = 5.;
 
 	Pattern->Use();
@@ -423,18 +425,19 @@ Display( )
 	Pattern->SetUniformVariable("uKd", uKd);
 	Pattern->SetUniformVariable("uKs", uKs);
 	Pattern->SetUniformVariable("point", pointx, pointy, pointz);
-	Pattern->SetUniformVariable("maxdist", maxdist);
+	Pattern->SetUniformVariable("uTime", Time);
+	//Pattern->SetUniformVariable("maxdist", maxdist);
 
-	//glShadeModel(GL_SMOOTH);
+	glShadeModel(GL_SMOOTH);
 
 	glPushMatrix();
-		SetMaterial(.7, .7, .7, 1.);
+		//SetMaterial(.7, .7, .7, 0.);
 		glCallList(Teapot);
 	glPopMatrix();
 	
 	Pattern->Use(0);
 
-	SetPointLight(GL_LIGHT0, 5., 5., 5., 1., 1., 1.);
+	//SetPointLight(GL_LIGHT0, 5., 5., 5., 1., 1., 1.);
 		
 
 	// draw some gratuitous text that just rotates on top of the scene:
