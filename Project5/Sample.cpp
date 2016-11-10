@@ -165,7 +165,9 @@ int		WhichColor;				// index into Colors[ ]
 int		WhichProjection;		// ORTHO or PERSP
 int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
-bool	Freeze;
+bool	Freeze = FALSE;
+bool	vertPattern = TRUE;
+bool	fragPattern = TRUE;
 float  Time = 0.;
 int Light0On =1;
 int Light1On =1;
@@ -393,8 +395,8 @@ Display( )
 	float S0, T0;
 	float Ds, Dt;
 	float V0, V1, V2;
-	float ColorR, ColorG, ColorB;
-	float SColorR, SColorG, SColorB;
+	float R, G, B;
+	float specR, specG, specB;
 	float uKa, uKd, uKs;
 
 	float pointx, pointy, pointz;
@@ -402,12 +404,12 @@ Display( )
 
 	S0 = 0.;
 	T0 = 0.;
-	ColorR = 0.7;
-	ColorG = 0.7;
-	ColorB = 0.7;
-	SColorR = .7;
-	SColorG = .7;
-	SColorB = .7;
+	R = 0.7;
+	G = 0.7;
+	B = 0.7;
+	specR = .7;
+	specG = .7;
+	specB = .7;
 	uKa = 0.7;
 	uKd = 0.7;
 	uKs = 0.7;
@@ -419,19 +421,21 @@ Display( )
 	Pattern->Use();
 	Pattern->SetUniformVariable("uS0", S0);
 	Pattern->SetUniformVariable("uT0", T0);
-	Pattern->SetUniformVariable("uColor", ColorR, ColorG, ColorB);
-	Pattern->SetUniformVariable("uSpecularColor", SColorR, SColorG, SColorB);
+	Pattern->SetUniformVariable("uColor", R, G, B);
+	Pattern->SetUniformVariable("uSpecularColor", specR, specG, specB);
 	Pattern->SetUniformVariable("uKa", uKa);
 	Pattern->SetUniformVariable("uKd", uKd);
 	Pattern->SetUniformVariable("uKs", uKs);
-	Pattern->SetUniformVariable("point", pointx, pointy, pointz);
 	Pattern->SetUniformVariable("uTime", Time);
-	//Pattern->SetUniformVariable("maxdist", maxdist);
+	Pattern->SetUniformVariable("vertPattern", vertPattern);
+	Pattern->SetUniformVariable("fragPattern", fragPattern);
+
 
 	glShadeModel(GL_SMOOTH);
 
 	glPushMatrix();
 		//SetMaterial(.7, .7, .7, 0.);
+		//glScalef(1. * Time, 1. * Time, 1. * Time);
 		glCallList(Teapot);
 	glPopMatrix();
 	
@@ -810,7 +814,6 @@ Keyboard( unsigned char c, int x, int y )
 			break;
 
 		case 'f':
-		case 'F':
 			Freeze = !Freeze;
 			if (Freeze)
 				glutIdleFunc(NULL);
@@ -818,15 +821,28 @@ Keyboard( unsigned char c, int x, int y )
 				glutIdleFunc(Animate);
 			break;
 
+		case 'N':
+			fragPattern = FALSE;
+			vertPattern = FALSE;
+			break;
+
+		case 'B':
+			fragPattern = TRUE;
+			vertPattern = TRUE;
+			break;
+
+		case 'F':
+			fragPattern = !fragPattern;
+			break;
+
+		case 'V':
+			vertPattern = !vertPattern;
+			break;
+
 		case '0':
 			Light0On = !Light0On; break;
 
-		case '1':
-			Light1On = !Light1On; break;
-
-		case '2':
-			Light2On = !Light2On; break;
-
+		
 
 
 		case 'q':

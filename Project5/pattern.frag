@@ -7,6 +7,8 @@ uniform float uShininess; // specular exponent
 uniform float uTime;
 const float PI = 3.14159;
 
+uniform bool fragPattern;
+
 in vec2 vST; // texture cords
 in vec3 vN; // normal vector
 in vec3 vL; // vector from point to light
@@ -20,11 +22,13 @@ main( )
     vec3 Eye = normalize(vE);
     vec3 myColor = uColor;
 
-	if( vST.s >= 0. && vST.s <= (1. * (sin(uTime * PI))) ) 
+	if(fragPattern)
 	{
-		myColor = vec3( sin(5. * uTime), sin(5. * uTime + PI), cos(5. * uTime) );
-    }
-
+		if( vST.s >= 0. && vST.s <= (1. * (sin(uTime * PI))) ) 
+		{
+			myColor = vec3( sin(5. * uTime), sin(5. * uTime + PI), cos(5. * uTime) );
+		}
+	}
     vec3 ambient = uKa * myColor;
     float d = max( dot(Normal,Light), 0. ); // only do diffuse if the light can see the point
     myColor = uColor;

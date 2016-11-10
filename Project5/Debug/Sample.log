@@ -1,6 +1,4 @@
 ﻿  Sample.cpp
-c:\code\cs450-graphics\project5\sample.cpp(405): warning C4305: '=': truncation from 'double' to 'float'
-c:\code\cs450-graphics\project5\sample.cpp(406): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(407): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(408): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(409): warning C4305: '=': truncation from 'double' to 'float'
@@ -8,12 +6,15 @@ c:\code\cs450-graphics\project5\sample.cpp(410): warning C4305: '=': truncation 
 c:\code\cs450-graphics\project5\sample.cpp(411): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(412): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(413): warning C4305: '=': truncation from 'double' to 'float'
-c:\code\cs450-graphics\project5\sample.cpp(415): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project5\sample.cpp(395): warning C4101: 'V1': unreferenced local variable
-c:\code\cs450-graphics\project5\sample.cpp(394): warning C4101: 'Dt': unreferenced local variable
-c:\code\cs450-graphics\project5\sample.cpp(395): warning C4101: 'V0': unreferenced local variable
-c:\code\cs450-graphics\project5\sample.cpp(394): warning C4101: 'Ds': unreferenced local variable
-c:\code\cs450-graphics\project5\sample.cpp(395): warning C4101: 'V2': unreferenced local variable
-c:\code\cs450-graphics\project5\sample.cpp(1279): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project5\sample.cpp(414): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project5\sample.cpp(415): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project5\sample.cpp(417): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project5\sample.cpp(438): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\project5\sample.cpp(397): warning C4101: 'V1': unreferenced local variable
+c:\code\cs450-graphics\project5\sample.cpp(396): warning C4101: 'Dt': unreferenced local variable
+c:\code\cs450-graphics\project5\sample.cpp(397): warning C4101: 'V0': unreferenced local variable
+c:\code\cs450-graphics\project5\sample.cpp(396): warning C4101: 'Ds': unreferenced local variable
+c:\code\cs450-graphics\project5\sample.cpp(397): warning C4101: 'V2': unreferenced local variable
+c:\code\cs450-graphics\project5\sample.cpp(1295): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project5\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project5\Debug\Sample.pdb (Full PDB)
