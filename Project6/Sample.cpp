@@ -16,8 +16,6 @@
 #include <GL/glut.h>
 
 
-
-
 // title of these windows:
 
 const char *WINDOWTITLE = { "OpenGL / GLUT Sample -- Joe Graphics" };
@@ -164,7 +162,9 @@ int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze = FALSE;
 float  Time = 0.;
-int Light0On =1;
+int Light0On = 1;
+int DrawControlPoints;
+int DrawControlLines;
 
 
 // function prototypes:
@@ -198,6 +198,64 @@ void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
 #define MS_PER_CYCLE 8000
+#define NUMPOINTS 10
+
+struct Point
+{
+	//float x0, y0, z0;       // initial coordinates
+	float x, y, z;        // animated coordinates
+};
+
+struct Curve
+{
+	float r, g, b;
+	Point p0, p1, p2, p3;
+};
+
+void DrawCurve(struct Curve *curve)
+{
+	glLineWidth(3.);
+	glColor3f(curve->r, curve->g, curve->b);
+	struct Point p0 = curve->p0;
+	struct Point p1 = curve->p1;
+	struct Point p2 = curve->p2;
+	struct Point p3 = curve->p3;
+	glBegin(GL_LINE_STRIP);
+	for (int it = 0; it <= NUMPOINTS; it++)
+	{
+		float t = (float)it / (float)NUMPOINTS;
+		float omt = 1.f - t;
+		float x = omt*omt*omt*p0.x + 3.f*t*omt*omt*p1.x + 3.f*t*t*omt*p2.x + t*t*t*p3.x;
+		float y = omt*omt*omt*p0.y + 3.f*t*omt*omt*p1.y + 3.f*t*t*omt*p2.y + t*t*t*p3.y;
+		float z = omt*omt*omt*p0.z + 3.f*t*omt*omt*p1.z + 3.f*t*t*omt*p2.z + t*t*t*p3.z;
+		glVertex3f(x, y, z);
+	}
+	glEnd();
+
+	glColor3f(1., 1., 1.);
+
+	// Draw control points
+	if (DrawControlPoints) {
+		glPointSize(5.);
+		glBegin(GL_POINTS);
+		glVertex3f(p0.x, p0.y, p0.z);
+		glVertex3f(p1.x, p1.y, p1.z);
+		glVertex3f(p2.x, p2.y, p2.z);
+		glVertex3f(p3.x, p3.y, p3.z);
+		glEnd();
+	}
+
+	// Draw control lines
+	if (DrawControlLines) {
+		glLineWidth(1.);
+		glBegin(GL_LINE_STRIP);
+		glVertex3f(p0.x, p0.y, p0.z);
+		glVertex3f(p1.x, p1.y, p1.z);
+		glVertex3f(p2.x, p2.y, p2.z);
+		glVertex3f(p3.x, p3.y, p3.z);
+		glEnd();
+	}
+}
 
 
 // main program:
@@ -326,7 +384,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt(0., 0., 8., 0., 0., 0., 0., 1., 0.);
+	gluLookAt(0., 0., 4., 0., 0., 0., 0., 1., 0.);
 
 
 	// rotate the scene:
@@ -373,7 +431,111 @@ Display( )
 	glEnable( GL_NORMALIZE );
 
 
-		
+	// Draw the flower
+	//glPushMatrix();
+	//int numcurves = 25;
+	//for (int c = 0; c < numcurves; c++) {
+	//	float angle = 360. * c / numcurves;
+	//	float move = (sin(Time * 2 * M_PI) + 1) / 2.5;
+	//	struct Curve curve;
+	//	struct Point p0 = { 0., 0., 0. };
+	//	struct Point p1 = { cos(angle) * 2, 1., sin(angle) * 2 };
+	//	struct Point p2 = { cos(angle / 3)*move * 2, 2. - move * 2, sin(angle * 3)*move * 2 };
+	//	struct Point p3 = { cos(angle / 2)*move * 3, 3. - move * 3, sin(angle / 2)*move * 3 };
+	//	//curve.p0 = p0;
+	//	//curve.p1 = p1;
+	//	//curve.p2 = p2;
+	//	//curve.p3 = p3;
+	//	curve.r = 1 - p3.y / 3;
+	//	curve.g = p3.y / 3;
+	//	curve.b = 0.;
+	//	DrawCurve(&curve);
+	//}
+	//glPopMatrix();
+
+	//Head half
+	glPushMatrix();
+	int numcurves = 75;
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
+		struct Point p2 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
+		struct Point p3 = { 0, 2., 0. };
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 0.;
+		curve.g = 0.3;
+		curve.b = 0.4;
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//head other half
+	glPushMatrix();
+	numcurves = 75;
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
+		struct Point p2 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
+		struct Point p3 = { 0, 2., 0. };
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 0.;
+		curve.g = 0.3;
+		curve.b = 0.4;
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//legs half
+	glPushMatrix();
+	numcurves = 6;
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { 2, -.5, (cos(angle*2)) / .75 };
+		struct Point p2 = { 2, -1., (cos(angle*2)) / .75 };
+		struct Point p3 = { 2, -3., (cos(angle*2)) / .75 };
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 0.5;
+		curve.g = 0.;
+		curve.b = 0.1;
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//legs other half
+	glPushMatrix();
+	numcurves = 6;
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { -2, -.5, (cos(angle * 2)) / .75 };
+		struct Point p2 = { -2, -1., (cos(angle * 2)) / .75 };
+		struct Point p3 = { -2, -3., (cos(angle * 2)) / .75 };
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 0.5;
+		curve.g = 0.;
+		curve.b = 0.1;
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
 
 	// draw some gratuitous text that just rotates on top of the scene:
 

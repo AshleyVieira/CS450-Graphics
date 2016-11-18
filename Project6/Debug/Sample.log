@@ -1,5 +1,35 @@
 ﻿  Sample.cpp
-c:\code\cs450-graphics\project6\sample.cpp(1048): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project6\sample.cpp(1107): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(460): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(463): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(463): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(464): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(464): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(471): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(472): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(480): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(483): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(483): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(484): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(484): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(491): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(492): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(501): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(504): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(504): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(505): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(505): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(506): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(506): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(513): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(521): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(524): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(524): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(525): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(525): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(526): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\code\cs450-graphics\project6\sample.cpp(526): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(533): warning C4305: '=': truncation from 'double' to 'float'
+c:\code\cs450-graphics\project6\sample.cpp(1208): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\project6\sample.cpp(1267): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project6\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\Project6\Debug\Sample.pdb (Full PDB)
