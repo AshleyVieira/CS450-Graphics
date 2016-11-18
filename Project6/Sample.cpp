@@ -144,6 +144,18 @@ const GLfloat FOGDENSITY  = { 0.30f };
 const GLfloat FOGSTART    = { 1.5 };
 const GLfloat FOGEND      = { 4. };
 
+struct Point
+{
+	//float x0, y0, z0;       // initial coordinates
+	float x, y, z;        // animated coordinates
+};
+
+struct Curve
+{
+	float r, g, b;
+	Point p0, p1, p2, p3;
+};
+
 
 // non-constant global variables:
 
@@ -192,6 +204,9 @@ void	Visibility( int );
 float Dot(float[3], float[3]);
 void Cross(float[3], float[3], float[3]);
 float Unit(float[3], float[3]);
+void RotateX(Point* , float,  float, float, float);
+void RotateY(Point* , float, float, float, float);
+void RotateZ(Point* , float, float, float, float);
 
 
 void	Axes( float );
@@ -200,17 +215,7 @@ void	HsvRgb( float[3], float [3] );
 #define MS_PER_CYCLE 8000
 #define NUMPOINTS 10
 
-struct Point
-{
-	//float x0, y0, z0;       // initial coordinates
-	float x, y, z;        // animated coordinates
-};
 
-struct Curve
-{
-	float r, g, b;
-	Point p0, p1, p2, p3;
-};
 
 void DrawCurve(struct Curve *curve)
 {
@@ -463,6 +468,10 @@ Display( )
 		struct Point p1 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
 		struct Point p2 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
 		struct Point p3 = { 0, 2., 0. };
+		RotateY(&p0, 90., 0., 0., 0.);
+		RotateY(&p1, 90., 0., 0., 0.);
+		RotateY(&p2, 90., 0., 0., 0.);
+		RotateY(&p3, 90., 0., 0., 0.);
 		curve.p0 = p0;
 		curve.p1 = p1;
 		curve.p2 = p2;
@@ -484,6 +493,10 @@ Display( )
 		struct Point p1 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
 		struct Point p2 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
 		struct Point p3 = { 0, 2., 0. };
+		RotateY(&p0, 90., 0., 0., 0.);
+		RotateY(&p1, 90., 0., 0., 0.);
+		RotateY(&p2, 90., 0., 0., 0.);
+		RotateY(&p3, 90., 0., 0., 0.);
 		curve.p0 = p0;
 		curve.p1 = p1;
 		curve.p2 = p2;
@@ -512,6 +525,7 @@ Display( )
 		curve.r = 0.5;
 		curve.g = 0.;
 		curve.b = 0.1;
+		
 		DrawCurve(&curve);
 	}
 	glPopMatrix();
@@ -1278,5 +1292,59 @@ float Unit(float vin[3], float vout[3])
 		vout[2] = vin[2];
 	}
 	return dist;
+}
+void
+RotateX(Point *p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x - xc;
+	float y = p->y - yc;
+	float z = p->z - zc;
+
+	float xp = x;
+	float yp = y*cos(rad) - z*sin(rad);
+	float zp = y*sin(rad) + z*cos(rad);
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
+}
+
+
+
+void
+RotateY(Point *p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x - xc;
+	float y = p->y - yc;
+	float z = p->z - zc;
+
+	float xp = x*cos(rad) + z*sin(rad);
+	float yp = y;
+	float zp = -x*sin(rad) + z*cos(rad);
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
+}
+
+
+
+void
+RotateZ(Point *p, float deg, float xc, float yc, float zc)
+{
+	float rad = deg * (M_PI / 180.f);         // radians
+	float x = p->x - xc;
+	float y = p->y - yc;
+	float z = p->z - zc;
+
+	float xp = x*cos(rad) - y*sin(rad);
+	float yp = x*sin(rad) + y*cos(rad);
+	float zp = z;
+
+	p->x = xp + xc;
+	p->y = yp + yc;
+	p->z = zp + zc;
 }
 
