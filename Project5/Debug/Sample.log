@@ -9,7 +9,6 @@ c:\code\cs450-graphics\project5\sample.cpp(413): warning C4305: '=': truncation 
 c:\code\cs450-graphics\project5\sample.cpp(414): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(415): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project5\sample.cpp(417): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\project5\sample.cpp(438): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\code\cs450-graphics\project5\sample.cpp(397): warning C4101: 'V1': unreferenced local variable
 c:\code\cs450-graphics\project5\sample.cpp(396): warning C4101: 'Dt': unreferenced local variable
 c:\code\cs450-graphics\project5\sample.cpp(397): warning C4101: 'V0': unreferenced local variable
