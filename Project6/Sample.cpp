@@ -175,8 +175,8 @@ float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze = FALSE;
 float  Time = 0.;
 int Light0On = 1;
-int DrawControlPoints;
-int DrawControlLines;
+bool DrawControlPoints;
+bool DrawControlLines;
 
 
 // function prototypes:
@@ -214,6 +214,7 @@ void	HsvRgb( float[3], float [3] );
 
 #define MS_PER_CYCLE 8000
 #define NUMPOINTS 10
+#define PI 3.1415926
 
 
 
@@ -435,29 +436,6 @@ Display( )
 
 	glEnable( GL_NORMALIZE );
 
-
-	// Draw the flower
-	//glPushMatrix();
-	//int numcurves = 25;
-	//for (int c = 0; c < numcurves; c++) {
-	//	float angle = 360. * c / numcurves;
-	//	float move = (sin(Time * 2 * M_PI) + 1) / 2.5;
-	//	struct Curve curve;
-	//	struct Point p0 = { 0., 0., 0. };
-	//	struct Point p1 = { cos(angle) * 2, 1., sin(angle) * 2 };
-	//	struct Point p2 = { cos(angle / 3)*move * 2, 2. - move * 2, sin(angle * 3)*move * 2 };
-	//	struct Point p3 = { cos(angle / 2)*move * 3, 3. - move * 3, sin(angle / 2)*move * 3 };
-	//	//curve.p0 = p0;
-	//	//curve.p1 = p1;
-	//	//curve.p2 = p2;
-	//	//curve.p3 = p3;
-	//	curve.r = 1 - p3.y / 3;
-	//	curve.g = p3.y / 3;
-	//	curve.b = 0.;
-	//	DrawCurve(&curve);
-	//}
-	//glPopMatrix();
-
 	//Head half
 	glPushMatrix();
 	int numcurves = 75;
@@ -465,9 +443,9 @@ Display( )
 		float angle = 360. * c / numcurves;
 		struct Curve curve;
 		struct Point p0 = { 0., 0., 0. };
-		struct Point p1 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
-		struct Point p2 = { cos(angle), 1., ((cos(angle*2)) / 1)-1 };
-		struct Point p3 = { 0, 2., 0. };
+		struct Point p1 = { cos(angle), 1.*((sin(2 * PI*Time) / 6) + 1.25), ((cos(angle*2)) / 1)-1 };
+		struct Point p2 = { cos(angle), 1.*((sin(2 * PI*Time) / 6) + 1.25), ((cos(angle*2)) / 1)-1 };
+		struct Point p3 = { 0, 2.*((sin(2*PI*Time)/6)+1.25), 0. };
 		RotateY(&p0, 90., 0., 0., 0.);
 		RotateY(&p1, 90., 0., 0., 0.);
 		RotateY(&p2, 90., 0., 0., 0.);
@@ -490,9 +468,9 @@ Display( )
 		float angle = 360. * c / numcurves;
 		struct Curve curve;
 		struct Point p0 = { 0., 0., 0. };
-		struct Point p1 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
-		struct Point p2 = { sin(angle), 1., ((cos(angle * 2)) / 1) + 1 };
-		struct Point p3 = { 0, 2., 0. };
+		struct Point p1 = { sin(angle), 1.*((sin(2 * PI*Time) / 6) + 1.25), ((cos(angle * 2)) / 1) + 1 };
+		struct Point p2 = { sin(angle), 1.*((sin(2 * PI*Time) / 6) + 1.25), ((cos(angle * 2)) / 1) + 1 };
+		struct Point p3 = { 0, 2.*((sin(2 * PI*Time) / 6) + 1.25), 0. };
 		RotateY(&p0, 90., 0., 0., 0.);
 		RotateY(&p1, 90., 0., 0., 0.);
 		RotateY(&p2, 90., 0., 0., 0.);
@@ -515,9 +493,9 @@ Display( )
 		float angle = 360. * c / numcurves;
 		struct Curve curve;
 		struct Point p0 = { 0., 0., 0. };
-		struct Point p1 = { 2, -.5, (cos(angle*2)) / .75 };
-		struct Point p2 = { 2, -1., (cos(angle*2)) / .75 };
-		struct Point p3 = { 2, -3., (cos(angle*2)) / .75 };
+		struct Point p1 = { 2*(sin(PI*Time)/3+.5), -.5, (cos(angle*2)) / .75 };
+		struct Point p2 = { 2*(sin(PI*Time)/3+.5), -1., (cos(angle*2)) / .75 };
+		struct Point p3 = { 2*(sin(PI*Time)/1), -3., (cos(angle*2)) / .75 };
 		curve.p0 = p0;
 		curve.p1 = p1;
 		curve.p2 = p2;
@@ -537,9 +515,9 @@ Display( )
 		float angle = 360. * c / numcurves;
 		struct Curve curve;
 		struct Point p0 = { 0., 0., 0. };
-		struct Point p1 = { -2, -.5, (cos(angle * 2)) / .75 };
-		struct Point p2 = { -2, -1., (cos(angle * 2)) / .75 };
-		struct Point p3 = { -2, -3., (cos(angle * 2)) / .75 };
+		struct Point p1 = { -2*(sin(PI*Time)/3+.5), -.5, (cos(angle * 2)) / .75 };
+		struct Point p2 = { -2*(sin(PI*Time)/3+.5), -1., (cos(angle * 2)) / .75 };
+		struct Point p3 = { -2*(sin(PI*Time)/1), -3., (cos(angle * 2)) / .75 };
 		curve.p0 = p0;
 		curve.p1 = p1;
 		curve.p2 = p2;
@@ -547,6 +525,118 @@ Display( )
 		curve.r = 0.5;
 		curve.g = 0.;
 		curve.b = 0.1;
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//Eye 1 half 1
+	glPushMatrix();
+	numcurves = 50;
+	glTranslatef(.6, 1.15, .6);
+	glScalef(.6, .6, .6);
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { cos(angle)/1.5, .33, (((cos(angle * 2)) / 2) - .5)*.8  };
+		struct Point p2 = { cos(angle)/1.5, .66, (((cos(angle * 2)) / 2) - .5)*.8  };
+		struct Point p3 = { 0, 1., 0. };
+		RotateY(&p0, 180., 0., 0., 0.);
+		RotateY(&p1, 180., 0., 0., 0.);
+		RotateY(&p2, 180., 0., 0., 0.);
+		RotateY(&p3, 180., 0., 0., 0.);
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 1.;
+		curve.g = 1.;
+		curve.b = 1.;
+		
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//eye 1 half 2
+	glPushMatrix();
+	numcurves = 50;
+	glTranslatef(.6, 1.15, .6);
+	glScalef(.6, .6, .6);
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { cos(angle) / 1.5, .33, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p2 = { cos(angle) / 1.5, .66, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p3 = { 0, 1., 0. };
+		/*RotateY(&p0, 90., 0., 0., 0.);
+		RotateY(&p1, 90., 0., 0., 0.);
+		RotateY(&p2, 90., 0., 0., 0.);
+		RotateY(&p3, 90., 0., 0., 0.);*/
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 1.;
+		curve.g = 1.;
+		curve.b = 1.;
+		
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//Eye 2 half 1
+	glPushMatrix();
+	numcurves = 50;
+	glTranslatef(-.6, 1.15, .6);
+	glScalef(.6, .6, .6);
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { cos(angle) / 1.5, .33, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p2 = { cos(angle) / 1.5, .66, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p3 = { 0, 1., 0. };
+		RotateY(&p0, 180., 0., 0., 0.);
+		RotateY(&p1, 180., 0., 0., 0.);
+		RotateY(&p2, 180., 0., 0., 0.);
+		RotateY(&p3, 180., 0., 0., 0.);
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 1.;
+		curve.g = 1.;
+		curve.b = 1.;
+
+		DrawCurve(&curve);
+	}
+	glPopMatrix();
+
+	//eye 2 half 2
+	glPushMatrix();
+	numcurves = 50;
+	glTranslatef(-.6, 1.15, .6);
+	glScalef(.6, .6, .6);
+	for (int c = 0; c < numcurves; c++) {
+		float angle = 360. * c / numcurves;
+		struct Curve curve;
+		struct Point p0 = { 0., 0., 0. };
+		struct Point p1 = { cos(angle) / 1.5, .33, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p2 = { cos(angle) / 1.5, .66, (((cos(angle * 2)) / 2) - .5)*.8 };
+		struct Point p3 = { 0, 1., 0. };
+		/*RotateY(&p0, 90., 0., 0., 0.);
+		RotateY(&p1, 90., 0., 0., 0.);
+		RotateY(&p2, 90., 0., 0., 0.);
+		RotateY(&p3, 90., 0., 0., 0.);*/
+		curve.p0 = p0;
+		curve.p1 = p1;
+		curve.p2 = p2;
+		curve.p3 = p3;
+		curve.r = 1.;
+		curve.g = 1.;
+		curve.b = 1.;
+
 		DrawCurve(&curve);
 	}
 	glPopMatrix();
@@ -906,6 +996,14 @@ Keyboard( unsigned char c, int x, int y )
 				glutIdleFunc(NULL);
 			else
 				glutIdleFunc(Animate);
+			break;
+
+		case '1':
+			DrawControlPoints = !DrawControlPoints;
+			break;
+
+		case '2':
+			DrawControlLines = !DrawControlLines;
 			break;
 
 		case '0':
