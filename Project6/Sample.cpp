@@ -532,7 +532,7 @@ Display( )
 	//Eye 1 half 1
 	glPushMatrix();
 	numcurves = 50;
-	glTranslatef(.6, 1.15, .6);
+	glTranslatef(.6, 1.15*((sin(2 * PI*Time) / 6) + 1.25), .4);
 	glScalef(.6, .6, .6);
 	for (int c = 0; c < numcurves; c++) {
 		float angle = 360. * c / numcurves;
@@ -560,7 +560,7 @@ Display( )
 	//eye 1 half 2
 	glPushMatrix();
 	numcurves = 50;
-	glTranslatef(.6, 1.15, .6);
+	glTranslatef(.6, 1.15*((sin(2 * PI*Time) / 6) + 1.25), .4);
 	glScalef(.6, .6, .6);
 	for (int c = 0; c < numcurves; c++) {
 		float angle = 360. * c / numcurves;
@@ -588,7 +588,7 @@ Display( )
 	//Eye 2 half 1
 	glPushMatrix();
 	numcurves = 50;
-	glTranslatef(-.6, 1.15, .6);
+	glTranslatef(-.6, 1.15*((sin(2 * PI*Time) / 6) + 1.25), .4);
 	glScalef(.6, .6, .6);
 	for (int c = 0; c < numcurves; c++) {
 		float angle = 360. * c / numcurves;
@@ -616,7 +616,7 @@ Display( )
 	//eye 2 half 2
 	glPushMatrix();
 	numcurves = 50;
-	glTranslatef(-.6, 1.15, .6);
+	glTranslatef(-.6, 1.15*((sin(2 * PI*Time) / 6) + 1.25), .4);
 	glScalef(.6, .6, .6);
 	for (int c = 0; c < numcurves; c++) {
 		float angle = 360. * c / numcurves;

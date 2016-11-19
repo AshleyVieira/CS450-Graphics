@@ -34,6 +34,7 @@ c:\code\cs450-graphics\project6\sample.cpp(520): warning C4838: conversion from 
 c:\code\cs450-graphics\project6\sample.cpp(520): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(527): warning C4305: '=': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project6\sample.cpp(535): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project6\sample.cpp(535): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(536): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\code\cs450-graphics\project6\sample.cpp(538): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(541): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
@@ -43,6 +44,7 @@ c:\code\cs450-graphics\project6\sample.cpp(542): warning C4838: conversion from 
 c:\code\cs450-graphics\project6\sample.cpp(542): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(542): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project6\sample.cpp(563): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project6\sample.cpp(563): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(564): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\code\cs450-graphics\project6\sample.cpp(566): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(569): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
@@ -52,6 +54,7 @@ c:\code\cs450-graphics\project6\sample.cpp(570): warning C4838: conversion from 
 c:\code\cs450-graphics\project6\sample.cpp(570): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(570): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project6\sample.cpp(591): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project6\sample.cpp(591): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(592): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\code\cs450-graphics\project6\sample.cpp(594): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(597): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
@@ -61,6 +64,7 @@ c:\code\cs450-graphics\project6\sample.cpp(598): warning C4838: conversion from 
 c:\code\cs450-graphics\project6\sample.cpp(598): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(598): warning C4305: 'initializing': truncation from 'double' to 'float'
 c:\code\cs450-graphics\project6\sample.cpp(619): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\project6\sample.cpp(619): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(620): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
 c:\code\cs450-graphics\project6\sample.cpp(622): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\project6\sample.cpp(625): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
