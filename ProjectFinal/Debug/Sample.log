@@ -1,0 +1,6 @@
+﻿  Sample.cpp
+c:\code\cs450-graphics\projectfinal\sample.cpp(1091): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(1150): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(1228): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.exe
+  Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.pdb (Full PDB)
