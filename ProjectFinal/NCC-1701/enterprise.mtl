@@ -8,7 +8,7 @@ Ks 0.145455 0.145455 0.145455
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctop.jpg
+map_Kd ncctop.bmp
 
 
 newmtl Material.001
@@ -19,8 +19,8 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccunnamed4.png
-map_Ka nccunnamed4.png
+map_Kd nccunnamed4.bmp
+map_Ka nccunnamed4.bmp
 
 
 newmtl Material.001_body
@@ -31,8 +31,8 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccimage1.jpg
-map_Ka nccunnamed4.png
+map_Kd nccimage1.bmp
+map_Ka nccunnamed4.bmp
 
 
 newmtl Material.001_bottom
@@ -43,11 +43,11 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccbottom.jpg
-map_Ka nccunnamed4.png
+map_Kd nccbottom.bmp
+map_Ka nccunnamed4.bmp
 
 
-newmtl Material.001_image0.jpg
+newmtl Material.001_image0.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -55,11 +55,11 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccimage0.jpg
-map_Ka nccunnamed4.png
+map_Kd nccimage0.bmp
+map_Ka nccunnamed4.bmp
 
 
-newmtl Material.001_unnamed4.png
+newmtl Material.001_unnamed4.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -67,8 +67,8 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccunnamed4.png
-map_Ka nccunnamed4.png
+map_Kd nccunnamed4.bmp
+map_Ka nccunnamed4.bmp
 
 
 newmtl Material.002
@@ -89,7 +89,7 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage1.jpg
+map_Kd nccimage1.bmp
 
 
 newmtl Material.002_bottom1
@@ -100,10 +100,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccbottom1.jpg
+map_Kd nccbottom1.bmp
 
 
-newmtl Material.002_image0.jpg
+newmtl Material.002_image0.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -111,10 +111,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage0.jpg
+map_Kd nccimage0.bmp
 
 
-newmtl Material.002_image2.jpg
+newmtl Material.002_image2.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -122,10 +122,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage2.jpg
+map_Kd nccimage2.bmp
 
 
-newmtl Material.002_image3.jpg
+newmtl Material.002_image3.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -133,10 +133,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage3.jpg
+map_Kd nccimage3.bmp
 
 
-newmtl Material.002_image4.jpg
+newmtl Material.002_image4.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -144,10 +144,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage4.jpg
+map_Kd nccimage4.bmp
 
 
-newmtl Material.002_image5.jpg
+newmtl Material.002_image5.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -155,10 +155,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage5.jpg
+map_Kd nccimage5.bmp
 
 
-newmtl Material.002_image8.jpg
+newmtl Material.002_image8.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -166,10 +166,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage8.jpg
+map_Kd nccimage8.bmp
 
 
-newmtl Material.002_image9.jpg
+newmtl Material.002_image9.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -177,10 +177,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccimage9.jpg
+map_Kd nccimage9.bmp
 
 
-newmtl Material.002_lines.jpg
+newmtl Material.002_lines.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -188,10 +188,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncclines.jpg
+map_Kd ncclines.bmp
 
 
-newmtl Material.002_tail1.jpg
+newmtl Material.002_tail1.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -199,10 +199,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctail1.jpg
+map_Kd ncctail1.bmp
 
 
-newmtl Material.002_tail3.jpg
+newmtl Material.002_tail3.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -210,10 +210,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctail3.jpg
+map_Kd ncctail3.bmp
 
 
-newmtl Material.002_tail3_1.jpg
+newmtl Material.002_tail3_1.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.700000 0.700000 0.700000
@@ -221,7 +221,7 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctail3_1.jpg
+map_Kd ncctail3_1.bmp
 
 
 newmtl Material.002_top1
@@ -232,10 +232,10 @@ Ks 0.140000 0.140000 0.140000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctop1.jpg
+map_Kd ncctop1.bmp
 
 
-newmtl Material.003_light1.jpg
+newmtl Material.003_light1.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -243,11 +243,11 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd ncclight1.jpg
-map_Ka ncclight1.jpg
+map_Kd ncclight1.bmp
+map_Ka ncclight1.bmp
 
 
-newmtl Material.005_tail.jpg
+newmtl Material.005_tail.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.800000 0.800000 0.800000
@@ -255,11 +255,11 @@ Ks 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd ncctail.jpg
-map_Ka ncctail.jpg
+map_Kd ncctail.bmp
+map_Ka ncctail.bmp
 
 
-newmtl Material.006_image6.jpg
+newmtl Material.006_image6.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
@@ -267,11 +267,11 @@ Ks 1.000000 1.000000 1.000000
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccimage6.jpg
-map_Ka nccimage6.jpg
+map_Kd nccimage6.bmp
+map_Ka nccimage6.bmp
 
 
-newmtl Material.007_image7.jpg
+newmtl Material.007_image7.bmp
 Ns 96.078431
 Ka 0.000000 0.000000 0.000000
 Kd 0.640000 0.640000 0.640000
@@ -279,8 +279,8 @@ Ks 0.027778 0.027778 0.027778
 Ni 1.000000
 d 1.000000
 illum 0
-map_Kd nccimage7.jpg
-map_Ka nccimage7.jpg
+map_Kd nccimage7.bmp
+map_Ka nccimage7.bmp
 
 
 newmtl Material_bottom
@@ -291,7 +291,7 @@ Ks 0.145455 0.145455 0.145455
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd nccbottom.jpg
+map_Kd nccbottom.bmp
 
 
 newmtl Material_top
@@ -302,6 +302,6 @@ Ks 0.145455 0.145455 0.145455
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd ncctop.jpg
+map_Kd ncctop.bmp
 
 

@@ -161,6 +161,8 @@ int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
 GLuint	Enterprise;
+GLuint	Borg;
+GLuint	Prometheus;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
 int		WhichColor;				// index into Colors[ ]
@@ -215,7 +217,8 @@ void SetSpotLight(int, float, float, float, float, float, float, float, float, f
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
-#define MS_PER_CYCLE 4000
+#define MS_PER_CYCLE 10000
+#define PI 3.14159
 
 
 // main program:
@@ -392,12 +395,9 @@ Display( )
 
 	// Do lighting
 	glEnable(GL_LIGHTING);
-	SetPointLight(GL_LIGHT0, 0, 3., 0., 3., 3., 3.);
-	SetPointLight(GL_LIGHT1, 0, -3., 0., 3., 3., 3.);
-	
-	glPushMatrix();
-	glTranslatef(2., 0., 0.);
 	glShadeModel(GL_SMOOTH);
+	SetPointLight(GL_LIGHT0, 0, 8., 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT1, 0, -8., 0., 1., 1., 1.);
 	if (Light0On) {
 		glEnable(GL_LIGHT0);
 	}
@@ -411,8 +411,29 @@ Display( )
 	else {
 		glDisable(GL_LIGHT1);
 	}
-	glCallList(Enterprise);
+	
+	//glPushMatrix();
+	//SetMaterial(.45, .45, .45, 0.);
+	//glTranslatef(3. * sin(Time * PI * 2), 0., 0.);
+	//glTranslatef(-35., 0., 0.);
+	////glScalef(.01, .01, .01);
+	//glCallList(Enterprise);
+	//glPopMatrix();
+
+	//glPushMatrix();
+	////glTranslatef(0., 0., 0.);
+	//glScalef(4., 4., 4.);
+	//SetMaterial(.3, .3, .3, 0.);
+	//glCallList(Borg);
+	//glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(5. * sin(Time * PI * 2), 0., 5. * sin(Time * PI * 2));
+	glTranslatef(10., 0., 0.);
+	SetMaterial(.45, .45, .45, 0.);
+	glCallList(Prometheus);
 	glPopMatrix();
+
 
 		//texture = BmpToTexture("looney_tunes_bugs.bmp", &texWidth, &texHeight);
 
@@ -748,7 +769,17 @@ InitLists( )
 
 	Enterprise = glGenLists(1);
 	glNewList(Enterprise, GL_COMPILE);
-	LoadObjFile("NCC-1701/enterprise.obj");
+	LoadObjFile("EnterpriseD/enterprise1701d.obj");
+	glEndList();
+
+	Borg = glGenLists(1);
+	glNewList(Borg, GL_COMPILE);
+	LoadObjFile("Borg/borgsmall.obj");
+	glEndList();
+
+	Prometheus = glGenLists(1);
+	glNewList(Prometheus, GL_COMPILE);
+	LoadObjFile("Prometheus/prometheus.obj");
 	glEndList();
 
 

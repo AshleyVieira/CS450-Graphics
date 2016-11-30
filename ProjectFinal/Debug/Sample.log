@@ -8,6 +8,8 @@ c:\code\cs450-graphics\projectfinal\loadobjfile.cpp(158): warning C4244: '=': co
 c:\code\cs450-graphics\projectfinal\loadobjfile.cpp(171): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\loadobjfile.cpp(175): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\loadobjfile.cpp(179): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(1255): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\projectfinal\sample.cpp(431): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(433): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(1286): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.pdb (Full PDB)
