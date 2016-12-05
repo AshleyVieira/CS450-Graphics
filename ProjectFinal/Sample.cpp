@@ -17,11 +17,7 @@
 
 #include "bmptotexture.cpp"
 #include "loadobjfile.cpp"
-
-
-
-
-
+#include "sphere.cpp"
 
 
 // title of these windows:
@@ -171,10 +167,15 @@ int		Xmouse, Ymouse;			// mouse values
 float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze;
 double  Time;
-int Light0On =1;
-int Light1On =1;
-int Light2On =1;
-bool Light3On;
+
+int Light0On = 1;
+int Light1On = 1;
+int Light2On = 1;
+int Light3On = 1;
+int Light4On = 1;
+int Light5On = 1;
+
+
 float White[] = { 1.,1.,1.,1. };
 unsigned char *texture;
 int texWidth, texHeight;
@@ -217,7 +218,7 @@ void SetSpotLight(int, float, float, float, float, float, float, float, float, f
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
-#define MS_PER_CYCLE 10000
+#define MS_PER_CYCLE 30000
 #define PI 3.14159
 
 
@@ -396,8 +397,12 @@ Display( )
 	// Do lighting
 	glEnable(GL_LIGHTING);
 	glShadeModel(GL_SMOOTH);
-	SetPointLight(GL_LIGHT0, 0, 8., 0., 1., 1., 1.);
-	SetPointLight(GL_LIGHT1, 0, -8., 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT0, 0., 5.1, 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT1, 0., -5.1, 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT2, 5.1, 0, 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT3, -5.1, -0, 0., 1., 1., 1.);
+	SetPointLight(GL_LIGHT4, 0., 0., 5.1, 1., 1., 1.);
+	SetPointLight(GL_LIGHT5, 0., 0., -5.1, 1., 1., 1.);
 	if (Light0On) {
 		glEnable(GL_LIGHT0);
 	}
@@ -412,6 +417,14 @@ Display( )
 		glDisable(GL_LIGHT1);
 	}
 	
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, tex0);
+	glPushMatrix();
+	SetMaterial(1., 1., 1., 1.);
+	MjbSphere(5., 50, 50);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
 	//glPushMatrix();
 	//SetMaterial(.45, .45, .45, 0.);
 	//glTranslatef(3. * sin(Time * PI * 2), 0., 0.);
@@ -428,27 +441,26 @@ Display( )
 	//glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(5. * sin(Time * PI * 2), 0., 5. * sin(Time * PI * 2));
-	glTranslatef(10., 0., 0.);
+	glTranslatef( sin(Time * .1 * 90.) * 20., 0., -cos(Time * .1 * 90.) * 20.);
+	glRotatef((480 * Time) + 120, 0., -1., 0.);
+	SetMaterial(.45, .45, .45, 0.);
+	glCallList(Prometheus);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(-sin(Time* .1 * 90.) * 20 , 0., cos(Time * .1 * 90.) * 20.);
+	glRotatef(  (480 * Time) - 60 , 0., -1., 0.);
+	printf("Time %f \n", Time);
 	SetMaterial(.45, .45, .45, 0.);
 	glCallList(Prometheus);
 	glPopMatrix();
 
 
-		//texture = BmpToTexture("looney_tunes_bugs.bmp", &texWidth, &texHeight);
-
-		////Texture Cylinder
-		//glEnable(GL_TEXTURE_2D);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	
+	
 
 
-		//glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		//glGenTextures(1, &tex0); // assign binding “handles”
-		//glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+		
 		
 
 	// draw some gratuitous text that just rotates on top of the scene:
@@ -750,8 +762,19 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 
-	
+	texture = BmpToTexture("sun.bmp", &texWidth, &texHeight);
 
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &tex0);
+	glBindTexture(GL_TEXTURE_2D, tex0);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
 }
 
 
@@ -769,12 +792,12 @@ InitLists( )
 
 	Enterprise = glGenLists(1);
 	glNewList(Enterprise, GL_COMPILE);
-	LoadObjFile("EnterpriseD/enterprise1701d.obj");
+	//LoadObjFile("EnterpriseD/enterprise1701d.obj");
 	glEndList();
 
 	Borg = glGenLists(1);
 	glNewList(Borg, GL_COMPILE);
-	LoadObjFile("Borg/borgsmall.obj");
+	//LoadObjFile("Borg/borgsmall.obj");
 	glEndList();
 
 	Prometheus = glGenLists(1);
