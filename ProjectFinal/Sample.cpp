@@ -157,8 +157,6 @@ int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
 GLuint	BoxList;
-GLuint	Enterprise;
-GLuint	Borg;
 GLuint	Prometheus;
 int		MainWindow;				// window id for main graphics window
 float	Scale;					// scaling factor
@@ -220,7 +218,7 @@ void SetSpotLight(int, float, float, float, float, float, float, float, float, f
 void	Axes( float );
 void	HsvRgb( float[3], float [3] );
 
-#define MS_PER_CYCLE 30000
+#define MS_PER_CYCLE 40000
 #define PI 3.14159
 
 
@@ -350,7 +348,7 @@ Display( )
 
 	// set the eye position, look-at position, and up-vector:
 
-	gluLookAt( 0., 3., 3.,     0., 2., 0.,     0., 1., 0. );
+	gluLookAt( 0., 16., 20.,     0., 0., 0.,     0., 1., 0. );
 
 
 	// rotate the scene:
@@ -399,24 +397,25 @@ Display( )
 	// Do lighting
 	glEnable(GL_LIGHTING);
 	glShadeModel(GL_SMOOTH);
-	SetPointLight(GL_LIGHT0, 0., 5.1, -40., 1., 1., 1.);
-	SetPointLight(GL_LIGHT1, 0., -5.1, -40., 1., 1., 1.);
-	SetPointLight(GL_LIGHT2, 5.1, 0, -40., 1., 1., 1.);
-	SetPointLight(GL_LIGHT3, -5.1, -0, -40., 1., 1., 1.);
-	SetPointLight(GL_LIGHT4, 0., 0., -35.1, 1., 1., 1.);
-	SetPointLight(GL_LIGHT5, 0., 0., -45.1, 1., 1., 1.);
 
-	SetPointLight(GL_LIGHT6, 0., 5.1, 45.1, 1., 1., 1.);
-	SetPointLight(GL_LIGHT7, 0., -5.1, 45.1, 1., 1., 1.);
+	//stars
+	SetPointLight(GL_LIGHT0, 0., 0, -40., 3., 3., 3.);
+	SetPointLight(GL_LIGHT1, 0., 0, 45., 3., 3., 3.);
 	
 
 	//If I need to turn lights off
-	/*if (Light0On) {
+	if (Light0On) {
 		glEnable(GL_LIGHT0);
 	}
 	else {
 		glDisable(GL_LIGHT0);
-	}*/
+	}
+	if (Light1On) {
+		glEnable(GL_LIGHT1);
+	}
+	else {
+		glDisable(GL_LIGHT1);
+	}
 
 	//Star
 	glEnable(GL_TEXTURE_2D);
@@ -440,9 +439,79 @@ Display( )
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	
+	//Prometheus torperdo light
+	SetPointLight(GL_LIGHT2, 0, 0, 20. * -cos((Time)*PI * 3), .5, .1, 0.);
+	if (Time > 0. && Time < .16 || Time > .33 && Time < .50 || Time > .70 && Time < .83) {
+		glEnable(GL_LIGHT2);
+	}
+	else {
+		glDisable(GL_LIGHT2);
+	}
+	//Prometheus torpedo 1
+	glPushMatrix();
+		glTranslatef(0., 0., 20. * -cos((Time)*PI*3));
+		printf("Time: %f\n", Time);
+		SetMaterial(1., .2, 0., 100.);
+		if (Time > 0. && Time < .16 || Time > .33 && Time < .50 || Time > .70 && Time < .83) {
+			glutSolidSphere(.3, 30., 30.);
+		}	
+	glPopMatrix();
 
+	//Borg torpedo light
+	SetPointLight(GL_LIGHT3, 20. * -cos((Time)*PI * 3. + (PI/3.8)), 0, 0., .05, .3, 0.);
+	if (Time > .40 && Time < .53 || Time > .75 && Time < .87 ) {
+		glEnable(GL_LIGHT3);
+	}
+	else {
+		glDisable(GL_LIGHT3);
+	}
+	//Borg torpedo 1
+	glPushMatrix();
+	glTranslatef(20. * -cos((Time)*PI * 3. + (PI / 3.8)), 0., 0.);
+	printf("Time: %f\n", Time);
+	SetMaterial(.1, .6, 0., 100.);
+	if (Time > .40 && Time < .53 || Time > .75 && Time < .87 ) {
+		glutSolidSphere(.3, 30., 30.);
+	}
+	glPopMatrix();
 
+	//Prometheus torperdo light
+	SetPointLight(GL_LIGHT4, 0, 0, -20. * -cos((Time)*PI * 3), .5, .1, 0.);
+	if (Time > 0. && Time < .16 || Time > .33 && Time < .50 || Time > .70 && Time < .83) {
+		glEnable(GL_LIGHT4);
+	}
+	else {
+		glDisable(GL_LIGHT4);
+	}
+	//Prometheus torpedo 2
+	glPushMatrix();
+	glTranslatef(0., 0., -20. * -cos((Time)*PI * 3));
+	printf("Time: %f\n", Time);
+	SetMaterial(1., .2, 0., 100.);
+	if (Time > 0. && Time < .16 || Time > .33 && Time < .50 || Time > .70 && Time < .83) {
+		glutSolidSphere(.3, 30., 30.);
+	}
+	glPopMatrix();
+
+	//Borg torpedo light
+	SetPointLight(GL_LIGHT3, -20. * -cos((Time)*PI * 3. + (PI / 3.7)), 0, 0., .05, .3, 0.);
+	if (Time > .40 && Time < .53 || Time > .75 && Time < .87) {
+		glEnable(GL_LIGHT3);
+	}
+	else {
+		glDisable(GL_LIGHT3);
+	}
+	//Borg torpedo 2
+	glPushMatrix();
+	glTranslatef(-20. * -cos((Time)*PI * 3. + (PI / 3.7)), 0., 0.);
+	printf("Time: %f\n", Time);
+	SetMaterial(.1, .6, 0., 100.);
+	if (Time > .40 && Time < .53 || Time > .75 && Time < .87) {
+		glutSolidSphere(.3, 30., 30.);
+	}
+	glPopMatrix();
+
+	//Borg Cube
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 	glBindTexture(GL_TEXTURE_2D, tex1);
@@ -450,30 +519,21 @@ Display( )
 		glScalef(4., 4., 4.);
 		SetMaterial(.3, .3, .3, 0.);
 		glCallList(BoxList);
-		//glCallList(Borg);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
+	//Starfield background
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	glBindTexture(GL_TEXTURE_2D, tex2);
 	glPushMatrix();
-		glScalef(60., 60., 60.);
+		glScalef(70., 70., 70.);
 		SetMaterial(1., 1., 1., 0.);
 		glCallList(BoxList);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-
-	glPushMatrix();
-		SetMaterial(.45, .45, .45, 0.);
-		glTranslatef(-sin(Time* .1 * 90.) * 20, 0., cos(Time * .1 * 90.) * 20.);
-		glRotatef((480 * Time) - 60, 0., -1., 0.);
-		glTranslatef(-35., 0., 0.);
-		//glScalef(.01, .01, .01);
-		glCallList(Enterprise);
-	glPopMatrix();
-
+	//Ship 1
 	glPushMatrix();
 		glTranslatef( sin(Time * .1 * 90.) * 20., 0., -cos(Time * .1 * 90.) * 20.);
 		glRotatef((480 * Time) + 120, 0., -1., 0.);
@@ -481,20 +541,14 @@ Display( )
 		glCallList(Prometheus);
 	glPopMatrix();
 
-	/*glPushMatrix();
+	//Ship 2
+	glPushMatrix();
 		glTranslatef(-sin(Time* .1 * 90.) * 20 , 0., cos(Time * .1 * 90.) * 20.);
 		glRotatef(  (480 * Time) - 60 , 0., -1., 0.);
 		SetMaterial(.45, .45, .45, 0.);
 		glCallList(Prometheus);
-	glPopMatrix();*/
+	glPopMatrix();
 
-
-	
-	
-
-
-		
-		
 
 	// draw some gratuitous text that just rotates on top of the scene:
 
@@ -813,7 +867,7 @@ InitGraphics( )
 	//END SUN
 
 	//BORG
-	textureBorg = BmpToTexture("Borg/BORGCUBE.bmp", &texWidth, &texHeight);
+	textureBorg = BmpToTexture("BORGCUBE.bmp", &texWidth, &texHeight);
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glGenTextures(1, &tex1);
 	glBindTexture(GL_TEXTURE_2D, tex1);
@@ -855,19 +909,9 @@ InitLists( )
 	glutSetWindow( MainWindow );
 
 
-	Enterprise = glGenLists(1);
-	glNewList(Enterprise, GL_COMPILE);
-	LoadObjFile("EnterpriseD/enterprise1701d.obj");
-	glEndList();
-
-	Borg = glGenLists(1);
-	glNewList(Borg, GL_COMPILE);
-	//LoadObjFile("Borg/borgsmall.obj");
-	glEndList();
-
 	Prometheus = glGenLists(1);
 	glNewList(Prometheus, GL_COMPILE);
-	LoadObjFile("Prometheus/prometheus.obj");
+	LoadObjFile("prometheus.obj");
 	glEndList();
 
 

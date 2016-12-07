@@ -14,21 +14,33 @@ c:\code\cs450-graphics\projectfinal\sphere.cpp(77): warning C4244: '=': conversi
 c:\code\cs450-graphics\projectfinal\sphere.cpp(78): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\sphere.cpp(82): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\sphere.cpp(83): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(402): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(403): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(404): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(405): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(406): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(407): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(409): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(410): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(451): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(469): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(443): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(443): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(452): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(454): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(456): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(461): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(461): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\sample.cpp(470): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(471): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(478): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(479): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(480): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(1452): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\projectfinal\sample.cpp(472): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(474): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(479): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(479): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(488): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(490): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(492): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(497): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(497): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(506): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(508): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(510): warning C4244: 'argument': conversion from 'double' to 'GLint', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(520): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(538): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(539): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(540): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(546): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(547): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(548): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(1496): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.pdb (Full PDB)
