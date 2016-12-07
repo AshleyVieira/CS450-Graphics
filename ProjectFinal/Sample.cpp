@@ -156,6 +156,7 @@ GLuint	AxesList;				// list to hold the axes
 int		AxesOn;					// != 0 means to draw the axes
 int		DebugOn;				// != 0 means to print debugging info
 int		DepthCueOn;				// != 0 means to use intensity depth cueing
+GLuint	BoxList;
 GLuint	Enterprise;
 GLuint	Borg;
 GLuint	Prometheus;
@@ -168,6 +169,7 @@ float	Xrot, Yrot;				// rotation angles in degrees
 bool	Freeze;
 double  Time;
 
+int borgTexOn = 1;
 int Light0On = 1;
 int Light1On = 1;
 int Light2On = 1;
@@ -177,9 +179,9 @@ int Light5On = 1;
 
 
 float White[] = { 1.,1.,1.,1. };
-unsigned char *texture;
+unsigned char *textureSun, *textureBorg, *textureStars;
 int texWidth, texHeight;
-GLuint tex0, tex1;
+GLuint tex0, tex1, tex2, tex3;
 
 
 
@@ -397,63 +399,94 @@ Display( )
 	// Do lighting
 	glEnable(GL_LIGHTING);
 	glShadeModel(GL_SMOOTH);
-	SetPointLight(GL_LIGHT0, 0., 5.1, 0., 1., 1., 1.);
-	SetPointLight(GL_LIGHT1, 0., -5.1, 0., 1., 1., 1.);
-	SetPointLight(GL_LIGHT2, 5.1, 0, 0., 1., 1., 1.);
-	SetPointLight(GL_LIGHT3, -5.1, -0, 0., 1., 1., 1.);
-	SetPointLight(GL_LIGHT4, 0., 0., 5.1, 1., 1., 1.);
-	SetPointLight(GL_LIGHT5, 0., 0., -5.1, 1., 1., 1.);
-	if (Light0On) {
+	SetPointLight(GL_LIGHT0, 0., 5.1, -40., 1., 1., 1.);
+	SetPointLight(GL_LIGHT1, 0., -5.1, -40., 1., 1., 1.);
+	SetPointLight(GL_LIGHT2, 5.1, 0, -40., 1., 1., 1.);
+	SetPointLight(GL_LIGHT3, -5.1, -0, -40., 1., 1., 1.);
+	SetPointLight(GL_LIGHT4, 0., 0., -35.1, 1., 1., 1.);
+	SetPointLight(GL_LIGHT5, 0., 0., -45.1, 1., 1., 1.);
+
+	SetPointLight(GL_LIGHT6, 0., 5.1, 45.1, 1., 1., 1.);
+	SetPointLight(GL_LIGHT7, 0., -5.1, 45.1, 1., 1., 1.);
+	
+
+	//If I need to turn lights off
+	/*if (Light0On) {
 		glEnable(GL_LIGHT0);
 	}
 	else {
 		glDisable(GL_LIGHT0);
-	}
+	}*/
 
-	if (Light1On) {
-		glEnable(GL_LIGHT1);
-	}
-	else {
-		glDisable(GL_LIGHT1);
-	}
-	
+	//Star
 	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 	glBindTexture(GL_TEXTURE_2D, tex0);
 	glPushMatrix();
-	SetMaterial(1., 1., 1., 1.);
-	MjbSphere(5., 50, 50);
+		glTranslatef(0., 0., 45.);
+		SetMaterial(1., 1., 1., 1.);
+		MjbSphere(5., 50, 50);
 	glPopMatrix();
 	glDisable(GL_TEXTURE_2D);
 
-	//glPushMatrix();
-	//SetMaterial(.45, .45, .45, 0.);
-	//glTranslatef(3. * sin(Time * PI * 2), 0., 0.);
-	//glTranslatef(-35., 0., 0.);
-	////glScalef(.01, .01, .01);
-	//glCallList(Enterprise);
-	//glPopMatrix();
+	//Star 2
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glBindTexture(GL_TEXTURE_2D, tex0);
+	glPushMatrix();
+		glTranslatef(0., 0., -40.);
+		SetMaterial(1., 1., 1., 1.);
+		MjbSphere(5., 50, 50);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
 
-	//glPushMatrix();
-	////glTranslatef(0., 0., 0.);
-	//glScalef(4., 4., 4.);
-	//SetMaterial(.3, .3, .3, 0.);
-	//glCallList(Borg);
-	//glPopMatrix();
+	
+
+
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+	glBindTexture(GL_TEXTURE_2D, tex1);
+	glPushMatrix();
+		glScalef(4., 4., 4.);
+		SetMaterial(.3, .3, .3, 0.);
+		glCallList(BoxList);
+		//glCallList(Borg);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
+	glEnable(GL_TEXTURE_2D);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+	glBindTexture(GL_TEXTURE_2D, tex2);
+	glPushMatrix();
+		glScalef(60., 60., 60.);
+		SetMaterial(1., 1., 1., 0.);
+		glCallList(BoxList);
+	glPopMatrix();
+	glDisable(GL_TEXTURE_2D);
+
 
 	glPushMatrix();
-	glTranslatef( sin(Time * .1 * 90.) * 20., 0., -cos(Time * .1 * 90.) * 20.);
-	glRotatef((480 * Time) + 120, 0., -1., 0.);
-	SetMaterial(.45, .45, .45, 0.);
-	glCallList(Prometheus);
+		SetMaterial(.45, .45, .45, 0.);
+		glTranslatef(-sin(Time* .1 * 90.) * 20, 0., cos(Time * .1 * 90.) * 20.);
+		glRotatef((480 * Time) - 60, 0., -1., 0.);
+		glTranslatef(-35., 0., 0.);
+		//glScalef(.01, .01, .01);
+		glCallList(Enterprise);
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslatef(-sin(Time* .1 * 90.) * 20 , 0., cos(Time * .1 * 90.) * 20.);
-	glRotatef(  (480 * Time) - 60 , 0., -1., 0.);
-	printf("Time %f \n", Time);
-	SetMaterial(.45, .45, .45, 0.);
-	glCallList(Prometheus);
+		glTranslatef( sin(Time * .1 * 90.) * 20., 0., -cos(Time * .1 * 90.) * 20.);
+		glRotatef((480 * Time) + 120, 0., -1., 0.);
+		SetMaterial(.45, .45, .45, 0.);
+		glCallList(Prometheus);
 	glPopMatrix();
+
+	/*glPushMatrix();
+		glTranslatef(-sin(Time* .1 * 90.) * 20 , 0., cos(Time * .1 * 90.) * 20.);
+		glRotatef(  (480 * Time) - 60 , 0., -1., 0.);
+		SetMaterial(.45, .45, .45, 0.);
+		glCallList(Prometheus);
+	glPopMatrix();*/
 
 
 	
@@ -762,10 +795,12 @@ InitGraphics( )
 	fprintf( stderr, "Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
 #endif
 
-	texture = BmpToTexture("sun.bmp", &texWidth, &texHeight);
+	//SUN
+	textureSun = BmpToTexture("sun.bmp", &texWidth, &texHeight);
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	glGenTextures(1, &tex0);
+	
 	glBindTexture(GL_TEXTURE_2D, tex0);
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -774,7 +809,37 @@ InitGraphics( )
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, textureSun);
+	//END SUN
+
+	//BORG
+	textureBorg = BmpToTexture("Borg/BORGCUBE.bmp", &texWidth, &texHeight);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &tex1);
+	glBindTexture(GL_TEXTURE_2D, tex1);
+	
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, textureBorg);
+	//END BORG
+
+	//STAR FIELD
+	textureStars = BmpToTexture("starfield2.bmp", &texWidth, &texHeight);
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	glGenTextures(1, &tex2);
+	glBindTexture(GL_TEXTURE_2D, tex2);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, texWidth, texHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, textureStars);
 }
 
 
@@ -792,7 +857,7 @@ InitLists( )
 
 	Enterprise = glGenLists(1);
 	glNewList(Enterprise, GL_COMPILE);
-	//LoadObjFile("EnterpriseD/enterprise1701d.obj");
+	LoadObjFile("EnterpriseD/enterprise1701d.obj");
 	glEndList();
 
 	Borg = glGenLists(1);
@@ -806,6 +871,81 @@ InitLists( )
 	glEndList();
 
 
+	float dx = BOXSIZE / 2.f;
+	float dy = BOXSIZE / 2.f;
+	float dz = BOXSIZE / 2.f;
+
+	BoxList = glGenLists( 1 );
+	glNewList( BoxList, GL_COMPILE );
+
+	glBegin( GL_QUADS );
+
+	//glColor3f( 0., 0., 1. );
+	glNormal3f( 0., 0.,  1. );
+	glTexCoord2f(0., 0.);
+	glVertex3f( -dx, -dy,  dz );
+	glTexCoord2f(0., 1.);
+	glVertex3f(  dx, -dy,  dz );
+	glTexCoord2f(1., 1.);
+	glVertex3f(  dx,  dy,  dz );
+	glTexCoord2f(1., 0.);
+	glVertex3f( -dx,  dy,  dz );
+
+	glNormal3f( 0., 0., -1. );
+	glTexCoord2f( 0., 0. );
+	glVertex3f( -dx, -dy, -dz );
+	glTexCoord2f( 0., 1. );
+	glVertex3f( -dx,  dy, -dz );
+	glTexCoord2f( 1., 1. );
+	glVertex3f(  dx,  dy, -dz );
+	glTexCoord2f( 1., 0. );
+	glVertex3f(  dx, -dy, -dz );
+
+	//glColor3f( 1., 0., 0. );
+	glNormal3f(  1., 0., 0. );
+	glTexCoord2f(0., 0.);
+	glVertex3f(  dx, -dy,  dz );
+	glTexCoord2f(0., 1.);
+	glVertex3f(  dx, -dy, -dz );
+	glTexCoord2f(1., 1.);
+	glVertex3f(  dx,  dy, -dz );
+	glTexCoord2f(1., 0.);
+	glVertex3f(  dx,  dy,  dz );
+
+	glNormal3f( -1., 0., 0. );
+	glTexCoord2f(0., 0.);
+	glVertex3f( -dx, -dy,  dz );
+	glTexCoord2f(0., 1.);
+	glVertex3f( -dx,  dy,  dz );
+	glTexCoord2f(1., 1.);
+	glVertex3f( -dx,  dy, -dz );
+	glTexCoord2f(1., 0.);
+	glVertex3f( -dx, -dy, -dz );
+
+	//glColor3f( 0., 1., 0. );
+	glNormal3f( 0.,  1., 0. );
+	glTexCoord2f(0., 0.);
+	glVertex3f( -dx,  dy,  dz );
+	glTexCoord2f(0., 1.);
+	glVertex3f(  dx,  dy,  dz );
+	glTexCoord2f(1., 1.);
+	glVertex3f(  dx,  dy, -dz );
+	glTexCoord2f(1., 0.);
+	glVertex3f( -dx,  dy, -dz );
+
+	glNormal3f( 0., -1., 0. );
+	glTexCoord2f(0., 0.);
+	glVertex3f( -dx, -dy,  dz );
+	glTexCoord2f(0., 1.);
+	glVertex3f( -dx, -dy, -dz );
+	glTexCoord2f(1., 1.);
+	glVertex3f(  dx, -dy, -dz );
+	glTexCoord2f(1., 0.);
+	glVertex3f(  dx, -dy,  dz );
+
+	glEnd( );
+
+	glEndList( );
 	// create the axes:
 
 	AxesList = glGenLists( 1 );
@@ -857,6 +997,9 @@ Keyboard( unsigned char c, int x, int y )
 
 		case '3':
 			Light3On = !Light3On; break;
+
+		case 'b':
+			borgTexOn = !borgTexOn; break;
 
 
 		case 'q':

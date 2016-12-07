@@ -14,18 +14,21 @@ c:\code\cs450-graphics\projectfinal\sphere.cpp(77): warning C4244: '=': conversi
 c:\code\cs450-graphics\projectfinal\sphere.cpp(78): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\sphere.cpp(82): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
 c:\code\cs450-graphics\projectfinal\sphere.cpp(83): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(400): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(401): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\code\cs450-graphics\projectfinal\sample.cpp(402): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\code\cs450-graphics\projectfinal\sample.cpp(403): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\code\cs450-graphics\projectfinal\sample.cpp(404): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\code\cs450-graphics\projectfinal\sample.cpp(405): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(444): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(445): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(446): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(451): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(452): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
-c:\code\cs450-graphics\projectfinal\sample.cpp(454): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\code\cs450-graphics\projectfinal\sample.cpp(1309): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+c:\code\cs450-graphics\projectfinal\sample.cpp(406): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(407): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(409): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(410): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(451): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(469): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(470): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(471): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(478): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(479): warning C4244: 'argument': conversion from 'double' to 'GLfloat', possible loss of data
+c:\code\cs450-graphics\projectfinal\sample.cpp(480): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\code\cs450-graphics\projectfinal\sample.cpp(1452): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.exe
   Sample.vcxproj -> C:\Code\CS450-Graphics\ProjectFinal\Debug\Sample.pdb (Full PDB)
